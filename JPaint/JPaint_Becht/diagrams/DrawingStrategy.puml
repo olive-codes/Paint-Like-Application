@@ -1,0 +1,28 @@
+@startuml DrawingStrategy
+
+abstract class DrawingStrategy {
+    - {static} HashMap<ShapeShadingType, DrawingStrategy> lookup
+    + {static} DrawingStrategy getStrategy(ShapeInfo si)
+    + {abstract} void draw(ShapeInfo si, Graphics2D g2d)
+}
+
+class OutlineDrawingStrategy {
+    + {static} DrawingStrategy INSTANCE
+    + void draw(ShapeInfo si, Graphics2D g2d)
+}
+
+class FilledInDrawingStrategy {
+    + {static} DrawingStrategy INSTANCE
+    + void draw(ShapeInfo si, Graphics2D g2d)
+}
+
+class OutlineAndFilledInDrawingStrategy {
+    + {static} DrawingStrategy INSTANCE
+    + void draw(ShapeInfo si, Graphics2D g2d)
+}
+
+DrawingStrategy <|-- OutlineDrawingStrategy
+DrawingStrategy <|-- FilledInDrawingStrategy
+DrawingStrategy <|-- OutlineAndFilledInDrawingStrategy
+
+@enduml

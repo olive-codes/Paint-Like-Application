@@ -1,0 +1,61 @@
+@startuml ClipBoard
+
+class ClipBoard {
+
+    + {static} final ClipBoard INSTANCE = new ClipBoard()
+    - final List<CreateShapeCommand> selected = new ArrayList<>()
+    - final List<ShapeInfoBuilder> clipboardList = new ArrayList<>()
+
+    - ClipBoard()
+    + void createCopyList(List<CreateShapeCommand> selected) 
+    + void copy()
+    + void paste() 
+    + void delete()
+    + void setSelected(List<CreateShapeCommand> selected)
+    + List<CreateShapeCommand> getSelected()
+
+}
+
+class PasteCommand {
+
+    - final List<CreateShapeCommand> shapestoPaste
+    - final PaintCanvasBase paintCanvas
+
+    + PasteCommand(List<CreateShapeCommand> clipBoardList, PaintCanvasBase paintCanvas)
+    + void execute()
+    + void undo()
+    + void redo()
+    - final void doPaste()
+}
+
+class DeleteCommand {
+
+    - final List<CreateShapeCommand> shapesToDelete
+    - final PaintCanvasBase paintCanvas
+
+    + DeleteCommand (List<CreateShapeCommand> selected, PaintCanvasBase paintCanvas)
+    + void execute()
+    + void undo() 
+    + void redo()
+    - final void delete()
+}
+
+class CreateShapeCommand {
+
+    + ShapeInfo shapeInfo
+
+    + CreateShapeCommand(PaintCanvasBase pc, Point start, Point end, ShapeInfo si)
+    + CreateShapeCommand(ShapeInfo si) 
+    + void update()
+    + void execute()
+    + void undo()
+    + void redo()
+}
+
+
+ClipBoard --|> ClipBoard
+ClipBoard --|> PasteCommand
+ClipBoard --|> DeleteCommand
+ClipBoard --|> CreateShapeCommand
+
+@enduml

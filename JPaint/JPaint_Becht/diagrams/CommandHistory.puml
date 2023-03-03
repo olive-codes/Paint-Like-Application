@@ -1,0 +1,45 @@
+@startuml CommandHistory
+class CommandHistory {
+    - {static} Stack<IUndoable> undoStack
+	- {static} Stack<IUndoable> redoStack
+    + {static} void add(IUndoable cmd)
+    + {static} boolean undo()
+    + {static} boolean redo()
+}
+interface IUndoable {
+    void undo();
+    void redo();
+}
+class CreateShapeCommand {
+    + ShapeInfo shapeInfo
+    ApplicationState appState
+    PaintCanvasBase pc
+    Point start
+    Point end
+    ShapeCollection shapelist
+
+    + void update() 
+    + Point getStart()
+    + Point getEnd() 
+    + void execute()
+    + Point[] getXY() 
+    + void undo() 
+    + void redo()
+}
+class MoveCommand {
+    - List<CreateShapeCommand> shapes
+    - double diffX, diffY
+    - double[] end1
+    - double[] start1
+    - PaintCanvasBase paintCanvas
+    + void execute()
+    + void undo()
+    + void redo()
+    - void doMove()
+    - void doMove(boolean isUndo)
+}
+
+CommandHistory *-- IUndoable
+IUndoable <|-- CreateShapeCommand
+IUndoable <|-- MoveCommand
+@enduml

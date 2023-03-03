@@ -1,0 +1,14 @@
+@startuml Example
+class Person {
+    + Address address
+}
+
+class Address {
+    + String street
+    + String city
+    + String state
+    + int zip
+}
+
+Person "1" -- "many" Address
+@enduml

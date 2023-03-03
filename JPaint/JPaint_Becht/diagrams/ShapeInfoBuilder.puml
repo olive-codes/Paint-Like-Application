@@ -1,0 +1,63 @@
+@startuml ShapeInfoBuilder
+
+class ShapeInfoBuilder {
+
+    + Shape shapeG2D
+    + ShapeColor primaryColor
+    + ShapeColor secondaryColor
+    + ShapeType shape
+    + ShapeShadingType shading
+    + Point start
+    + Point end
+    + ShapeCollection sl
+    + ApplicationState state
+    + PaintCanvasBase pc
+    + double width
+    + double height
+    + double x
+    + double y
+    + double x2
+    + double y2
+    + boolean isSelected
+    + boolean inGroup
+    + CreateShapeCommand outlineShape
+
+    + {static} ShapeInfoBuilder copy(ShapeInfo toCopy) 
+    + ShapeInfoBuilder offsetX(double x) 
+    + ShapeInfo build() 
+    + ShapeInfoBuilder offsetY(int y) 
+ 
+}
+
+class ShapeInfo {
+
+    + boolean isGroup
+    + List<ShapeInfo> group
+    + Shape shapeG2D
+    + ShapeColor primaryColor
+    + ShapeColor secondaryColor
+    + ShapeType shape
+    + ShapeShadingType shading
+    + Point start
+    + Point end
+    + ShapeCollection sl
+    + ApplicationState state
+    + PaintCanvasBase pc
+    + double width
+    + double height
+    + double x
+    + double y
+    + double x2
+    + double y2
+    + boolean isSelected
+    + boolean inGroup
+    + CreateShapeCommand outlineShape
+
+    + ShapeInfo(ApplicationState state, PaintCanvasBase pc, Point start, Point end, double x, double y, double x2, double y2, double w, double h)
+ 
+}
+
+ShapeInfoBuilder <|-- ShapeInfoBuilder
+ShapeInfoBuilder --|> ShapeInfo
+
+@enduml

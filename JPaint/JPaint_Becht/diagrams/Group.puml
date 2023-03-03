@@ -1,0 +1,26 @@
+@startuml Group
+
+class Group {
+    - final List<IShape> groupedElements
+    + Group(List<IShape> elements) 
+    + void draw(Graphics2D g2d)
+    + BoundaryBox getBoundaryBox()
+    + boolean intersects(Rectangle2D shape)
+    + ShapeBuilder getBuilder()
+    + void offSetX(double x)
+    + void offSetY(double y)
+    + List<IShape> getShapes()
+}
+
+interface IShape {
+    + void draw(Graphics2D g2d)
+    + BoundaryBox getBoundaryBox()
+    + boolean intersects(Rectangle2D shape)
+    + ShapeBuilder getBuilder()
+    + void offSetX(double x)
+    + void offSetY(double y)
+}
+
+IShape <|-- Group
+
+@enduml
